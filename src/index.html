@@ -74,8 +74,7 @@ gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
   <nobr><sup>2</sup><a href="https://khoury.northeastern.edu/" target="_blank"
   >Northeastern University</a>,</nobr>
   <nobr><sup>3</sup><a href="https://www.cs.technion.ac.il/" target="_blank"
-  >Technion - IIT</a></nobr>;
-  <nobr><sup>*</sup><a class="likelink">Equal Contribution</a></nobr>
+  >Technion - IIT</a></nobr>
 </address>
  </div>
 </div><!-- end nd-pageheader -->
@@ -86,7 +85,7 @@ gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
 <p>
 <a href="https://arxiv.org/pdf/2202.05262.pdf" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/paper-thumb.png" style="border:1px solid" alt="ArXiv Preprint thumbnail" data-nothumb=""><br>ArXiv<br>Preprint</a>
 <a href="https://github.com/kmeng01/memit" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/code-thumb.png" style="border:1px solid" alt="Github code thumbnail" data-nothumb=""><br>Source Code<br>Github</a>
-<a href="https://rome.baulab.info/" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/rome-thumb.png" style="border:1px solid" alt="ROME project thumbnail" data-nothumb=""><br>Previous work<br>ROME</a>
+<a href="https://rome.baulab.info/" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/rome-thumb.png" style="border:1px solid" alt="ROME project thumbnail" data-nothumb=""><br>Previous work:<br>ROME</a>
 </p>
 
 <div class="card" style="max-width: 1020px;">
@@ -124,12 +123,12 @@ even the largest models it will be missing specialized knowledge, and a model
 will also contain obsolete knowledge that it learned from old text.
 
 <p style="text-align:center">
-GPT-3 predicts: <em>Polaris is in the constellation <b>Ursa Major</b></em>
+GPT-3 predicts: <em>Polaris is in the constellation <b>Ursa Minor</b></em>
   (<span style="color:green">correct!</span>)
 </p>
 <p style="text-align:center">
 GPT-3 predicts: <em>Arneb is in the constellation of <b>Aquila</b></em>
-  (<span style="color:red">incorrect</span>)
+  (<span style="color:red">incorrect - should be Lepus</span>)
 </p>
 <p style="text-align:center">
 GPT-3 predicts: <em>The current Vice President of the United States is named <b>Mike Pence</b></em>
@@ -139,10 +138,11 @@ GPT-3 predicts: <em>The current Vice President of the United States is named <b>
 
 <p>To fix such problems, recently, several <em>knowledge-editing</em> methods
 have been proposed to insert new memories directly into model parameters.
-However, most of this these methods are focused on updating/adding a single
-memory into the model. In practice we may want to insert <em>thousands</em> of
-new memories in order to update or improve the model, which is several orders
-of magnitude beyond the capabilities of the previous knowledge-editing methods.
+However, most of this these methods are focused on updating a single
+memory in the model. In practice we may want to insert <em>thousands</em> of
+new memories in order to update or improve the model.  Scaling to sucn levels
+is several orders of magnitude beyond the capabilities of knowledge-editing methods
+up to now.
 
 <p>In this work, we propose <b>MEMIT</b>, which is capable of updating
 <b>thousands of memories at once</b>.
