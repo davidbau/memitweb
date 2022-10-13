@@ -104,7 +104,7 @@ to a state-of-the art method for editing a GPT model's factual knowledge.
 <p>
 <p>Large language model contain <em>implicit</em> knowledge with no
 built-in way to enuemrate or update that knowledge.
-In this paper, we take on the update problem, asking how hundreds or
+In this paper, we take on the update problem, asking if hundreds or
 thousands of factual associations can be edited at once.
 </p>
 </div><!--card-block-->
@@ -116,33 +116,50 @@ thousands of factual associations can be edited at once.
 <div class="col">
 <h2>Why Edit Knowledge in a Model?</h2>
 
-<p>One of the classical problems in artificial intelligence is the creation of
-a <em>knowledge base</em> that can retrieve knowledge about facts in the real world,
-such as ("Michael Jordan", "plays the sport") &rightarrow; "basketball".
-Since massive language models are able to answer such factual questions flexibly
-using natural language, they are candidates for use as a new kind of
-knowledge base.
+<p>Large language models such as the GPT models contain a lot of
+<em>world knowledge</em> such as facts about real people, places, and
+things.  For example, if you ask GPT-3 to complete the sentence
 
-<!-- <p>However, even very large language models are known to
-  <ul>
-    <li> lack specialized knowledge.
-    <li> have biases
-    <li> recall obsolete information 
-  </ul>
-</p> -->
+<p>
+<center><em>Michael Jordan plays the sport...</em></center>
+</p>
 
-<p>However, these language models will recall obsolete information from the point in time when the training data was crawled.
-The naive solution is to train the model periodically with updated datasets. But, that is infeasible given the amount of time 
-and compute resources required to train a model from scratch. Recently, some <em>knowledge-editing</em> methods have been
-proposed to insert new memories directly into model parameters. However, most of this line of work is focused on updating/adding a single
-memory into the model. In practice we may want to insert <em>thousands</em> of new memories in order to update or treat the model, but a 
-naive sequential approach of the current state-of-the-art models fails to scale up. In this work, we propose <b>MEMIT, which is capable
-of updating thousands of memories at once!</b> 
+<p>the model will predict <em>"<b>basketball</b>"</em>, a word that
+not only is grammatically correct, but that it is also consistent with
+a true fact in the real world.  The model knows something about Michael Jordan.
+
+<p>However, the knowledge contained in a large language model is not perfect:
+even the largest models it will be missing specialized knowledge, and a model
+will also contain obsolete knowledge that it learned from old text.
+
+<p style="text-align:center">
+GPT-3 predicts: <em>Polaris is in the constellation <b>Ursa Major</b></em>
+  (<span style="color:green">correct!</span>)
+</p>
+<p style="text-align:center">
+GPT-3 predicts: <em>Arneb is in the constellation of <b>Aquila</b></em>
+  (<span style="color:red">incorrect</span>)
+</p>
+<p style="text-align:center">
+GPT-3 predicts: <em>The current Vice President of the United States is named <b>Mike Pence</b></em>
+  (<span style="color:red">obsolete</span>)
+</p>
+
+
+<p>To fix such problems, recently, several <em>knowledge-editing</em> methods
+have been proposed to insert new memories directly into model parameters.
+However, most of this these methods are focused on updating/adding a single
+memory into the model. In practice we may want to insert <em>thousands</em> of
+new memories in order to update or improve the model, which is several orders
+of magnitude beyond the capabilities of the previous knowledge-editing methods.
+
+<p>In this work, we propose <b>MEMIT</b>, which is capable of updating
+<b>thousands of memories at once</b>.
 </p>
 
 <figure>
   <img src="images/Paper/MEMIT-graph-crop.png" class="center_image">
-  <figcaption>Fig.1 - (a) Language models can be viewed as knowledge bases containing memorized tuples (s, r, o), each connecting some 
+  <figcaption>(a) Language models can be viewed as knowledge bases containing memorized tuples (s, r, o), each connecting some 
     subject <b><i>s</i></b> to an object <b><i>o</i></b> via a relation <b><i>r</i></b>, e.g., (s = Michael Jordan, r = plays sport, o = basketball). 
     (b) MEMIT modifies transformer weights to edit memories, e.g., “Michael Jordan now plays the sport baseball,” while (c) maintaining generalization, 
     specificity, and fluency at scales beyond other methods. As Section 5.2.2 details, editing score is the harmonic mean of efficacy, generalization, 
@@ -150,7 +167,8 @@ of updating thousands of memories at once!</b>
   </figcaption>
 </figure>
 
-<br/>
+<h2>How does it work?</h2>
+
 <p><b>MEMIT</b> is a successor to our previous work <a href="https://rome.baulab.info/">ROME</a>, which performs a <em>rank-one</em> modification of the 
   MLP weights of a single layer to directly write a memory into the model. MEMIT builds upon ROME to insert many memories by modifying the MLP weights 
   of a <em>range of</em> critical layers. We perform causal tracing to find a set of mediating MLP layers that recall memories about a certain subject.
@@ -161,7 +179,6 @@ of updating thousands of memories at once!</b>
   <img src="images/Paper/mrome-architecture-crop.png" class="center_image">
 </figure>
 
-<br/>
 <p>Then for a set of new memories we calculate the update <b>&#916;</b> and spread this <b>&#916;</b> across all the mediating MLP layers such that at 
 the final layer the output of final mediating layer captures all the new memories.
 </p>
