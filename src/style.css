@@ -238,6 +238,13 @@ nobr.widenobr {
   text-align: left;
   vertical-align: middle;
 }
+
+.center_image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
 /* Trick for moving the media-control-panel down on chrome */
 /*
 video::-webkit-media-controls-panel {

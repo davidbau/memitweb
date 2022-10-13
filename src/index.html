@@ -123,7 +123,52 @@ Since massive language models are able to answer such factual questions flexibly
 using natural language, they are candidates for use as a new kind of
 knowledge base.
 
-<p>However
+<!-- <p>However, even very large language models are known to
+  <ul>
+    <li> lack specialized knowledge.
+    <li> have biases
+    <li> recall obsolete information 
+  </ul>
+</p> -->
+
+<p>However, these language models will recall obsolete information from the point in time when the training data was crawled.
+The naive solution is to train the model periodically with updated datasets. But, that is infeasible given the amount of time 
+and compute resources required to train a model from scratch. Recently, some <em>knowledge-editing</em> methods have been
+proposed to insert new memories directly into model parameters. However, most of this line of work is focused on updating/adding a single
+memory into the model. In practice we may want to insert <em>thousands</em> of new memories in order to update or treat the model, but a 
+naive sequential approach of the current state-of-the-art models fails to scale up. In this work, we propose <b>MEMIT, which is capable
+of updating thousands of memories at once!</b> 
+</p>
+
+<figure>
+  <img src="images/Paper/MEMIT-graph-crop.png" class="center_image">
+  <figcaption>Fig.1 - (a) Language models can be viewed as knowledge bases containing memorized tuples (s, r, o), each connecting some 
+    subject <b><i>s</i></b> to an object <b><i>o</i></b> via a relation <b><i>r</i></b>, e.g., (s = Michael Jordan, r = plays sport, o = basketball). 
+    (b) MEMIT modifies transformer weights to edit memories, e.g., “Michael Jordan now plays the sport baseball,” while (c) maintaining generalization, 
+    specificity, and fluency at scales beyond other methods. As Section 5.2.2 details, editing score is the harmonic mean of efficacy, generalization, 
+    and specificity metrics.
+  </figcaption>
+</figure>
+
+<br/>
+<p><b>MEMIT</b> is a successor to our previous work <a href="https://rome.baulab.info/">ROME</a>, which performs a <em>rank-one</em> modification of the 
+  MLP weights of a single layer to directly write a memory into the model. MEMIT builds upon ROME to insert many memories by modifying the MLP weights 
+  of a <em>range of</em> critical layers. We perform causal tracing to find a set of mediating MLP layers that recall memories about a certain subject.
+  For GPT-J those layers are <b>&#8475;</b> = {3, 4, 5, 6, 7, 8}.
+</p>
+
+<figure>
+  <img src="images/Paper/mrome-architecture-crop.png" class="center_image">
+</figure>
+
+<br/>
+<p>Then for a set of new memories we calculate the update <b>&#916;</b> and spread this <b>&#916;</b> across all the mediating MLP layers such that at 
+the final layer the output of final mediating layer captures all the new memories.
+</p>
+
+<figure>
+  <img src="images/Paper/mrome-update-crop.png" class="center_image">
+</figure>
 
 <h2>How to Cite</h2>
 
