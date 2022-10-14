@@ -99,12 +99,12 @@ gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
 in the world, but they have no built-in way to update that knowledge.
 In <a href="https://rome.baulab.info/">previous work (ROME)</a>
 we found that memorized factual associations can be located at specific modules
-in a GPT network, and we developed a way to directly edit an individual
-factual association.
+in a GPT network, and building on that insight, we developed a way to directly
+edit parameters for an individual fact.
 </p>
 <p>
 In this paper, we develop an improved direct editing method (MEMIT) and scale it
-up, finding that direct editing can update hundreds or thousands of memories
+up, finding that we can update hundreds or thousands of memories
 simultaneously, improving on previous approaches by orders of magnitude.
 </p>
 </div><!--card-block-->
@@ -114,6 +114,19 @@ simultaneously, improving on previous approaches by orders of magnitude.
 
 <div class="row">
 <div class="col">
+<figure class="center_image" style="margin-top: 30px">
+  <img src="images/Paper/MEMIT-graph-crop.png" style="width:100%">
+  <figcaption>(a) Language models can be viewed as knowledge bases containing memorized
+    tuples (s, r, o), each connecting some subject <b><i>s</i></b> to an object
+    <b><i>o</i></b> via a relation <b><i>r</i></b>, e.g., (s = Michael Jordan,
+    r = plays sport, o = basketball).  (b) MEMIT modifies transformer weights to edit
+    memories, e.g., "Michael Jordan now plays the sport baseball," while (c) maintaining
+    generalization, specificity, and fluency at scales beyond other methods.
+    As detailed in Section 5.2.2 of the paper, editing score is the harmonic mean of
+    efficacy, generalization, and specificity metrics.
+  </figcaption>
+</figure>
+
 <h2>Why edit knowledge in a model?</h2>
 
 <p>Large language models such as the GPT models contain some amount of
@@ -158,16 +171,6 @@ a large model.
 is capable of updating <b>thousands of memories at once</b>.
 </p>
 
-<figure>
-  <img src="images/Paper/MEMIT-graph-crop.png" class="center_image">
-  <figcaption>(a) Language models can be viewed as knowledge bases containing memorized tuples (s, r, o), each connecting some 
-    subject <b><i>s</i></b> to an object <b><i>o</i></b> via a relation <b><i>r</i></b>, e.g., (s = Michael Jordan, r = plays sport, o = basketball). 
-    (b) MEMIT modifies transformer weights to edit memories, e.g., "Michael Jordan now plays the sport baseball," while (c) maintaining generalization, 
-    specificity, and fluency at scales beyond other methods. As Section 5.2.2 details, editing score is the harmonic mean of efficacy, generalization, 
-    and specificity metrics.
-  </figcaption>
-</figure>
-
 <h2>How does it work?</h2>
 
 <p><b>MEMIT</b> is a successor to our previous work <a href="https://rome.baulab.info/">ROME</a>, which performs a <em>rank-one</em> modification of the 
@@ -201,7 +204,7 @@ the final layer the output of final mediating layer captures all the new memorie
 <h3 class="card-header">bibliography</h3>
 <div class="card-block">
 <p style="text-indent: -3em; margin-left: 3em;" class="card-text clickselect">
-Kevin Meng, Arnab Sen Sharma, Alex Andonian, Yonatan Belinkov, and David Bau. "<em>Mass Editing Memory in a Transformer.</em>" arXiv preprint <nobr><a href="https://arxiv.org/pdf/2210.07229.pdf">arXiv:2210.07229</a> (2022).</nobr>
+Kevin Meng, Arnab Sen Sharma, Alex Andonian, Yonatan Belinkov, and David Bau. "<em>Mass Editing Memory in a Transformer.</em>" arXiv preprint <nobr><a href="https://arxiv.org/abs/2210.07229">arXiv:2210.07229</a> (2022).</nobr>
 </p>
 </div>
 <h3 class="card-header">bibtex</h3>
