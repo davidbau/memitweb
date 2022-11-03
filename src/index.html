@@ -83,10 +83,17 @@ gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
 </div><!-- end nd-pageheader -->
 
 <div class="container">
+<div class="row justify-content-center" style="margin-bottom: 20px">
+<p class="text-center">
+<a href="https://memit.baulab.us/"
+   >New!  Try interacting with a MEMIT-edited GPT to see the effect of inserting hundreds of memories.</a>
+</p>
+</div>
 <div class="row justify-content-center text-center">
 
 <p>
 <a href="https://arxiv.org/pdf/2210.07229.pdf" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/paper-thumb.png" style="border:1px solid; margin: 0 38px;" alt="ArXiv Preprint thumbnail" data-nothumb=""><br>ArXiv<br>Preprint</a>
+<a href="https://memit.baulab.us/" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/memit-demo.png" style="border:1px solid; margin: 0 38px;" alt="ROME project thumbnail" data-nothumb=""><br>MEMIT-Edited<br>GPT demo</a>
 <a href="https://github.com/kmeng01/memit" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/code-thumb.png" style="border:1px solid; margin: 0 38px;" alt="Github code thumbnail" data-nothumb=""><br>Source Code<br>Github</a>
 <a href="https://rome.baulab.info/" class="d-inline-block p-3 align-top" target="_blank"><img height="100" width="78" src="images/rome-thumb.png" style="border:1px solid; margin: 0 38px;" alt="ROME project thumbnail" data-nothumb=""><br>Previous work:<br>ROME</a>
 </p>
@@ -98,13 +105,13 @@ gtag('js', new Date()); gtag('config', 'G-FD12LWN557');
 <p>Large language model contain implicit knowledge of facts
 in the world, but they have no built-in way to update that knowledge.
 In <a href="https://rome.baulab.info/">previous work (ROME)</a>
-we found that memorized factual associations can be located at specific modules
-in a GPT network, and building on that insight, we developed a way to directly
-edit parameters for an individual fact.
+we found that memorized factual associations can be located at a specific location
+in a GPT network, and we developed a way to directly edit parameters to alter
+that location to change the model's knowledge of a single fact.
 </p>
 <p>
 In this paper, we develop an improved direct editing method (MEMIT) and scale it
-up, finding that we can update hundreds or thousands of memories
+up to perform many edits at once. We find that we can update <b>thousands of memories</b>
 simultaneously, improving on previous approaches by orders of magnitude.
 </p>
 </div><!--card-block-->
@@ -161,7 +168,7 @@ GPT-3 predicts: <em>The current Vice President of the United States is named <b>
 
 <p>To fix such problems, several <em>knowledge-editing</em> methods
 have been proposed to insert new memories directly into model parameters.
-However, most of this these methods are focused on updating a single
+Yet most of this these methods are focused on updating a single
 memory in the model, and it has been a challenge to use those methods
 to update more than a handful of facts. In practice we may want to insert
 hundreds or thousands of new memories in order to update or improve
@@ -242,8 +249,6 @@ $(document).on('click', '.clickselect', function(ev) {
   sel.removeAllRanges();
   sel.addRange(range);
 });
-// Google analytics below.
-window.dataLayer = window.dataLayer || [];
 </script>
 </html>
 
